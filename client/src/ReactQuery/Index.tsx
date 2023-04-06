@@ -1,4 +1,4 @@
-import { trpc } from "./trpc";
+import { trpc } from "../trpc";
 
 export function Index() {
   const greetings = trpc.greetings.useQuery();

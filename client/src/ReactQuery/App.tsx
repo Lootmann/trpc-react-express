@@ -1,7 +1,7 @@
 import { httpBatchLink } from "@trpc/client";
 import { Index } from "./Index";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { trpc } from "./trpc";
+import { trpc } from "../trpc";
 import { useState } from "react";
 
 export function App() {

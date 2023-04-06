@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { App } from "./App";
 import { App as ReactQueryApp } from "./ReactQuery/App";
 import { App as WithoutReactQueryApp } from "./WithoutReactQuery/App";
+import { App as CreateApp } from "./Create/App";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
@@ -16,8 +17,12 @@ const router = createBrowserRouter([
         element: <ReactQueryApp />,
       },
       {
-        path: "/without-react-query",
+        path: "/without",
         element: <WithoutReactQueryApp />,
+      },
+      {
+        path: "/create",
+        element: <CreateApp />,
       },
     ],
   },
