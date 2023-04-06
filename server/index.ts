@@ -2,6 +2,7 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import cors from "cors";
 import express from "express";
 import { initTRPC } from "@trpc/server";
+import { z } from "zod";
 
 const app = express();
 const PORT = 3000;
@@ -15,6 +16,12 @@ const appRouter = t.router({
   greetings: t.procedure.query(() => {
     return "hello world :^)";
   }),
+
+  create: t.procedure
+    .input(z.object({ name: z.string() }))
+    .query(({ input }) => {
+      return `Greeting ${input}`;
+    }),
 });
 
 app.use(cors());
