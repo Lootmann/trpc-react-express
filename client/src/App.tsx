@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
 export function App() {
@@ -23,7 +22,7 @@ export function App() {
           to={`/without-react-query`}
           className="bg-zinc-400 text-slate-900 hover:bg-fuchsia-600 px-2 rounded-md transition-all duration-200"
         >
-          React Query
+          Without React Query
         </Link>
       </header>
 
