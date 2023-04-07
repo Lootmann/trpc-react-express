@@ -20,8 +20,8 @@ const appRouter = t.router({
   createUser: t.procedure
     .input(
       z.object({
-        name: z.string(),
-        email: z.string(),
+        name: z.string().min(1),
+        email: z.string().min(1),
       })
     )
     .mutation(async ({ input }) => {
