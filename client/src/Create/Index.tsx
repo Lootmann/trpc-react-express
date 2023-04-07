@@ -24,6 +24,10 @@ export function Index() {
 
   return (
     <div className="w-1/2">
+      <p className="p-2 text-red-700">
+        {createMutation.error && createMutation.error.message}
+      </p>
+
       <form
         method="post"
         onSubmit={(e) => onSubmit(e)}
