@@ -5,10 +5,12 @@ export const greetings = async () => {
 };
 
 export const getUsers = async () => {
+  // return array[User(), User(), ...]
   return prisma.user.findMany();
 };
 
 export const createUsers = async (name: string, email: string) => {
+  // return User()
   return prisma.user.create({
     data: {
       name: name,

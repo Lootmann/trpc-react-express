@@ -9,20 +9,18 @@ import { z } from "zod";
 const t = initTRPC.create({});
 
 const appRouter = t.router({
-  greetings: t.procedure
+  greetings: t.procedure.output(z.string()).query(async () => {
+    return await greetings();
+  }),
+
+  users: t.procedure
     .output(
-      z.object({
-        greetings: z.string(),
-      })
+      z.array(z.object({ id: z.number(), name: z.string(), email: z.string() }))
     )
     .query(async () => {
-      const res = await greetings();
-      return { greetings: res };
+      const users = await getUsers();
+      return users;
     }),
-
-  users: t.procedure.query(() => {
-    return getUsers();
-  }),
 
   createUser: t.procedure
     .input(
