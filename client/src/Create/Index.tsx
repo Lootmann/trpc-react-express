@@ -5,7 +5,13 @@ export function Index() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
 
-  const createMutation = trpc.createUser.useMutation();
+  const utils = trpc.useContext();
+  const users = trpc.users.useQuery();
+  const createMutation = trpc.createUser.useMutation({
+    onSuccess: () => {
+      utils.users.invalidate();
+    },
+  });
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -24,6 +30,14 @@ export function Index() {
 
   return (
     <div className="w-1/2">
+      <div className="p-6 border">
+        {users.data?.map((user) => (
+          <p key={user.id}>
+            {user.id}. {user.name} ({user.email})
+          </p>
+        ))}
+      </div>
+
       <p className="p-2 text-red-700">
         {createMutation.error && createMutation.error.message}
       </p>
@@ -31,7 +45,7 @@ export function Index() {
       <form
         method="post"
         onSubmit={(e) => onSubmit(e)}
-        className="flex flex-col gap-5"
+        className="flex flex-col gap-5 border p-4"
       >
         <input
           type="text"
