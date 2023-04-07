@@ -7,13 +7,14 @@ import { z } from "zod";
 
 // routing
 const t = initTRPC.create({});
+const publicProcedure = t.procedure;
 
 const appRouter = t.router({
-  greetings: t.procedure.output(z.string()).query(async () => {
+  greetings: publicProcedure.output(z.string()).query(async () => {
     return await greetings();
   }),
 
-  users: t.procedure
+  users: publicProcedure
     .output(
       z.array(z.object({ id: z.number(), name: z.string(), email: z.string() }))
     )
@@ -22,7 +23,7 @@ const appRouter = t.router({
       return users;
     }),
 
-  createUser: t.procedure
+  createUser: publicProcedure
     .input(
       z.object({
         name: z.string().min(1),
