@@ -1,6 +1,7 @@
 import * as trpcExpress from "@trpc/server/adapters/express";
 import cors from "cors";
 import express from "express";
+import { createUsers, getUsers, greetings } from "./apis/users";
 import { initTRPC } from "@trpc/server";
 import { z } from "zod";
 
@@ -14,13 +15,17 @@ const t = initTRPC.create({});
 
 const appRouter = t.router({
   greetings: t.procedure.query(() => {
-    return "hello world :^)";
+    return greetings();
+  }),
+
+  users: t.procedure.query(() => {
+    return getUsers();
   }),
 
   create: t.procedure
-    .input(z.object({ name: z.string() }))
+    .input(z.object({ name: z.string(), email: z.string() }))
     .query(({ input }) => {
-      return `Greeting ${input.name}`;
+      return createUsers(input.name, input.email);
     }),
 });
 
