@@ -1,7 +1,7 @@
 import { prisma } from "./prisma";
 
 export const greetings = async () => {
-  return "hello world";
+  return "Hi! I'm tRPC:^)";
 };
 
 export const getUsers = async () => {

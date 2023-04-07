@@ -11,8 +11,9 @@ export function App() {
 
   useEffect(() => {
     const fetchGreeting = async () => {
-      const greeting = await client.greetings.query();
-      setMessage(greeting);
+      // client.greetings return just string 'greeting'
+      const resp = await client.greetings.query();
+      setMessage(resp);
     };
 
     fetchGreeting();

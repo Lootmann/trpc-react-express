@@ -11,6 +11,10 @@ export function Index() {
     onSuccess: () => {
       utils.users.invalidate();
     },
+    onError: (error) => {
+      // this shows 'TRPCClientError: ...'
+      console.log(error);
+    },
   });
 
   function onChange(e: React.ChangeEvent<HTMLInputElement>) {
