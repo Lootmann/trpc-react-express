@@ -9,9 +9,16 @@ import { z } from "zod";
 const t = initTRPC.create({});
 
 const appRouter = t.router({
-  greetings: t.procedure.query(() => {
-    return greetings();
-  }),
+  greetings: t.procedure
+    .output(
+      z.object({
+        greetings: z.string(),
+      })
+    )
+    .query(async () => {
+      const res = await greetings();
+      return { greetings: res };
+    }),
 
   users: t.procedure.query(() => {
     return getUsers();
